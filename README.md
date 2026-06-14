@@ -37,3 +37,32 @@ Menú interactivo con 4 opciones. `PREGUNTAS` es un diccionario que mapea cada s
 
 ---
 
+## Desafíos Implementados
+
+### L3 — Encadenamiento hacia Atrás (`backward_chain`)
+
+**Qué hace:** dado un diagnóstico específico (meta), determina qué síntomas hay que confirmar para llegar a él, en lugar de partir de síntomas hacia una conclusión.
+
+**Cómo funciona:**
+1. Busca qué regla produce la conclusión buscada.
+2. Por cada condición de esa regla: si ya está en hechos → confirmada; si no → pregunta al usuario.
+3. Si todas las condiciones se confirman → meta probada.
+4. Es recursiva: una condición podría ser conclusión de otra regla.
+5. El parámetro `visitados` evita ciclos infinitos.
+
+**Justificación:** permite al técnico partir de una hipótesis ("creo que es sobrecalentamiento") y que el sistema le diga exactamente qué verificar para confirmarla, en lugar de responder todas las preguntas.
+
+---
+
+### L4 — Exportar Red de Inferencia (`exportar_red`)
+
+**Qué hace:** recorre la base de conocimiento y construye un grafo con nodos y aristas, exportado como JSON.
+
+**Estructura:**
+- **Nodos:** cada síntoma (`tipo: "sintoma"`) y cada conclusión (`tipo: "conclusion"`). Sin duplicados (controlado con un `set`).
+- **Aristas:** cada regla como conexión entre sus condiciones y su conclusión, incluyendo `confianza`.
+
+**Justificación:** permite visualizar externamente (con herramientas como Gephi o D3.js) cómo fluye el razonamiento del sistema. También sirve para auditar la base de conocimiento y detectar síntomas o conclusiones huérfanas.
+
+---
+
