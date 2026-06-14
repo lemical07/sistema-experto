@@ -26,3 +26,14 @@ Menú interactivo con 4 opciones. `PREGUNTAS` es un diccionario que mapea cada s
 
 ---
 
+## Ajustes Realizados
+
+| Ajuste | Justificación |
+|---|---|
+| Se agregó `import json` | Necesario para L4; el código original no lo incluía |
+| `base_de_hechos.clear()` en `consultar()` | Sin esto, los hechos de una sesión anterior contaminaban la siguiente |
+| Se refactorizó `consultar()` como función | El código original llamaba directamente a `consultar()` sin menú; imposible reutilizar |
+| Se agregó `menu_principal()` | Permite navegar entre inferencia hacia adelante, L3 y L4 sin reiniciar |
+
+---
+
